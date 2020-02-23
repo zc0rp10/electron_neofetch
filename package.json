@@ -1,0 +1,30 @@
+{
+  "name": "electron-neofetch",
+  "version": "1.0.0",
+  "description": "A replica of the neofetch terminal program writen with electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zc0rp10/electron_neofetch.git"
+  },
+  "keywords": [
+    "neofetch",
+    "electron",
+    "js",
+    "javascript",
+    "learning"
+  ],
+  "author": "bjorn.fallbom@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zc0rp10/electron_neofetch/issues"
+  },
+  "homepage": "https://github.com/zc0rp10/electron_neofetch#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^8.0.1"
+  }
+}
