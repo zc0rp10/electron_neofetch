@@ -23,7 +23,9 @@
     "url": "https://github.com/zc0rp10/electron_neofetch/issues"
   },
   "homepage": "https://github.com/zc0rp10/electron_neofetch#readme",
-  "dependencies": {},
+  "dependencies": {
+    "systeminformation": "^4.22.3"
+  },
   "devDependencies": {
     "electron": "^8.0.1"
   }

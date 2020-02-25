@@ -12,6 +12,7 @@
 // })
 
 const os = require("os");
+const si = require("systeminformation")
 const { screen } = require("electron").remote;
 const { spawn } = require("child_process");
 
