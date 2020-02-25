@@ -1,4 +1,5 @@
-# ![Electron](./electron_logo.svg?raw=true& | width=100) Electron Neofetch Look-alike
+# <img src="/electron_logo.svg" width="30px"> Electron Neofetch Look-alike
+
 
 ## Description
 
