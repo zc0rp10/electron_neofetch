@@ -19,6 +19,6 @@ Will only run on Linux as I've had to use make use of spawn and exect in nodeJS 
 
 To add full support for more distubutions requires;
 
-- Additional images would need to be added.
+- Additional images for each distrubution.
 - More options to be added to the window manager array.
 - If statments for multiple package managers.
