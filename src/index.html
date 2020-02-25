@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>Electron Neofetch</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <!-- <h1>Hello World!</h1>
+    We are using Node.js <span id="node-version"></span>,
+    Chromium <span id="chrome-version"></span>,
+    and Electron <span id="electron-version"></span>. -->
+    <div class="row">
+      <div id="os-logo"><img src="manjaro.svg" alt="" /></div>
+      <div id="system-info">
+        <p class="title">
+          <span id="username" class="green"></span>@<span
+            id="hostname"
+            class="green"
+          ></span>
+        <p class="new-line"><span class="green">OS:</span> <span id="os"></span></p>
+        <p class="new-line"><span class="green">Host:</span> <span id="host"></span></p>
+        <p class="new-line"><span class="green">Kernel:</span> <span id="kernel"></span></p>
+        <p class="new-line"><span class="green">Uptime:</span> <span id="uptime"></span></p>
+        <p class="new-line"><span class="green">Packages:</span> <span id="packages"></span></p>
+        <p class="new-line"><span class="green">Shell:</span> <span id="shell"></span></p>
+        <p class="new-line"><span class="green">Resolution:</span> <span id="resolution"></span></p>
+        <p class="new-line"><span class="green">DE:</span> <span id="de"></span></p>
+        <p class="new-line"><span class="green">WM:</span> <span id="wm"></span></p>
+        <p class="new-line"><span class="green">CPU:</span> <span id="cpu"></span></p>
+        <p class="new-line"><span class="green">GPU:</span> <span id="gpu"></span></p>
+        <p class="new-line"><span class="green">Memory:</span> <span id="memory"></span></p>
+        </p>
+      </div>
+    </div>
+
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.green {
+  color: #35bf5c;
+  font-weight: 700;
+}
+
+.new-line {
+  margin: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 40% auto;
+}
+
+#os-logo {
+  width: 100%;
+  //TODO: MAKE FLEX
+}
+
+.title {
+  border-bottom: 1px dashed #fff;
+  display: inline-block;
+  margin-block-start: 0px;
+  padding-bottom: 5px;
+  font-size: 15px;
+}
