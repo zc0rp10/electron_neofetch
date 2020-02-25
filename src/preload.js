@@ -14,21 +14,36 @@
 const os = require("os");
 const si = require("systeminformation");
 const { screen } = require("electron").remote;
-const { spawn } = require("child_process");
+const { spawn, exec } = require("child_process");
 
-let pkgCount = [];
-
-//Get the number of installed packages on the system from terminal command line
-const getPackages = () => {
-  const cliCommand = spawn("pacman", ["-Qq"]);
-  cliCommand.stdout.on("data", data => {
-    pkgString = `${data}`;
-    pkgCount = pkgString.split(/\n/);
-  });
+//Object to hold data from below spawned processes to shell
+const dataFromShell = {
+  packageCount: Number,
+  de: String,
+  wm: String
 };
-getPackages();
 
-//Get uptime is seconds from nodeJS then convert to hours and minutes
+//Gets packages count
+spawn("pacman", ["-Qq"]).stdout.on("data", data => {
+  dataFromShell.packageCount = `${data}`.split(/\n/).length;
+});
+
+//Gets Desktop Enviroment
+exec('echo "$XDG_CURRENT_DESKTOP"', function(error, stdout) {
+  dataFromShell.de = `${stdout}`;
+});
+
+//Gets Winow Manager, no simple way to check via bash, only option to brute force over an array with all possibilitites
+const wManagers = ["kwin", "xfwm4", "muffin", "mate", "mutter"];
+wManagers.forEach(wManager => {
+  exec(`pgrep -u 1000 ${wManager}`, function(error, stdout) {
+    if (`${stdout}`) {
+      dataFromShell.wm = `${wManager}`;
+    }
+  });
+});
+
+//Convert seconds to hours and minutes, left over seconds are ignored
 function secondsToHm() {
   t = os.uptime();
   var h = Math.floor(t / 3600);
@@ -42,11 +57,12 @@ window.addEventListener("DOMContentLoaded", () => {
   $ = document.getElementById.bind(document);
   $("username").innerHTML = os.userInfo(username).username;
   $("hostname").innerHTML = os.hostname();
-
   $("kernel").innerHTML = os.release();
   $("uptime").innerHTML = secondsToHm();
-  $("packages").innerHTML = pkgCount.length;
+  $("packages").innerHTML = dataFromShell.packageCount;
   $("shell").innerHTML = os.userInfo(username).shell;
+  $("de").innerHTML = dataFromShell.de;
+  $("wm").innerHTML = dataFromShell.wm;
   $("resolution").innerHTML = `${screen.getPrimaryDisplay().size.width} x ${
     screen.getPrimaryDisplay().size.height
   }`;
@@ -57,7 +73,23 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   si.osInfo().then(data => {
-    console.log(data);
     $("os").innerHTML = `${data.distro} ${data.arch}`;
+    $("os-logo").src = `${data.distro}.svg`;
+  });
+
+  si.cpu().then(data => {
+    $(
+      "cpu"
+    ).innerHTML = `${data.manufacturer} ${data.brand} (${data.cores}) @ ${data.speedmax} GHz`;
+  });
+
+  si.graphics().then(data => {
+    data.controllers.forEach(controller => {
+      console.log(`${controller.vendor} ${controller.model}`);
+      $("system-info").insertAdjacentHTML(
+        "beforeend",
+        `<p class="new-line"><span class="green">GPU:</span> <span id="gpu">${controller.vendor} ${controller.model}</span></p>`
+      );
+    });
   });
 });

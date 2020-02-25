@@ -20,8 +20,8 @@ body {
 }
 
 #os-logo {
-  width: 100%;
-  //TODO: MAKE FLEX
+  max-width: 213px;
+  
 }
 
 .title {
